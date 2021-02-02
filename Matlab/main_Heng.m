@@ -28,8 +28,8 @@ B = imcomplement(DInv);
 B_lownoise = imguidedfilter(B);
 figure, montage({With_Ultrasound, B_lownoise});
 %% 提取局部图像
-P1 = imcrop(Without_Ultrasound,[1400 330 500 500]);%这里中括号[a b c d]里的a,b表示剪切的xy起点，以上面为基础，c,d为剪切xy的大小（横x竖y）
-P2 = imcrop(With_Ultrasound,[1400 330 500 500]);
+P1 = imcrop(A_lownoise,[1400 330 500 500]);%这里中括号[a b c d]里的a,b表示剪切的xy起点，以上面为基础，c,d为剪切xy的大小（横x竖y）
+P2 = imcrop(B_lownoise,[1400 330 500 500]);
 figure
 subplot(121);imshow(P1);title('未加超声');
 subplot(122);imshow(P2);title('加超声后');
@@ -50,6 +50,19 @@ imwrite(Without_Ultrasound_1, 'crop_Without_Ultrasound.png');
 imwrite(With_Ultrasound_1, 'crop_With_Ultrasound.png');
 
 %% 边缘检测
-BW = edge(Without_Ultrasound_1);
+
+%Laplacian of Gaussian（LoG检测器）标准差为7.闭合曲线检测，
+BW1 = edge(Without_Ultrasound_1, 'log', 0, 7);
+BW2 = edge(With_Ultrasound_1, 'log', 0, 7);
 figure
-imshow(BW)
+subplot(121); imshow(BW1); title("未加超声");
+subplot(122); imshow(BW2); title("加上超声");
+
+%canny边缘检测器
+BW3 = edge(Without_Ultrasound_1, 'canny', 0, 6.5);
+BW4 = edge(With_Ultrasound_1, 'canny', 0, 6.5);
+figure
+subplot(121); imshow(BW3); title("未加超声");
+subplot(122); imshow(BW4); title("加上超声");
+
+
