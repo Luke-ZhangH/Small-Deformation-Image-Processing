@@ -55,6 +55,20 @@ BW1 = edge(Without_Ultrasound_1, 'log', 0, 7);
 BW2 = edge(With_Ultrasound_1, 'log', 0, 7);
 
 BWi_1 = imcomplement(BW1);
+
+% [r,c] = size(BWi_1); 将二值图像的黑色边缘检测结果转换为RGB图像的红色边缘，利于观察
+% image = ones(r,c,3);
+% for i = 1:r
+%     for j = 1:c
+%         if BWi_1(i,j) == 0
+%             image(i,j,1) = 255;
+%             image(i,j,2) = 0;
+%             image(i,j,3) = 0;
+%         end
+%     end
+% end
+% imshow(image);
+
 BW_UINT8_1 = im2uint8(BWi_1)./4;
 BW_Last_1 = imadd(BW_UINT8_1, Without_Ultrasound_1);
 BW_1 = imadjust(BW_Last_1);
