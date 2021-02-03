@@ -50,19 +50,43 @@ imwrite(Without_Ultrasound_1, 'crop_Without_Ultrasound.png');
 imwrite(With_Ultrasound_1, 'crop_With_Ultrasound.png');
 
 %% ±ßÔµ¼ì²â
-
 %Laplacian of Gaussian£¨LoG¼ì²âÆ÷£©±ê×¼²îÎª7.±ÕºÏÇúÏß¼ì²â£¬
 BW1 = edge(Without_Ultrasound_1, 'log', 0, 7);
 BW2 = edge(With_Ultrasound_1, 'log', 0, 7);
+
+BWi_1 = imcomplement(BW1);
+BW_UINT8_1 = im2uint8(BWi_1)./4;
+BW_Last_1 = imadd(BW_UINT8_1, Without_Ultrasound_1);
+BW_1 = imadjust(BW_Last_1);
+
+BWi_2 = imcomplement(BW2);
+BW_UINT8_2 = im2uint8(BWi_2)./4;
+BW_Last_2 = imadd(BW_UINT8_2, With_Ultrasound_1);
+BW_2 = imadjust(BW_Last_2);
+
 figure
-subplot(121); imshow(BW1); title("Î´¼Ó³¬Éù");
-subplot(122); imshow(BW2); title("¼ÓÉÏ³¬Éù");
+subplot(121); imshow(BW_1); title("Î´¼Ó³¬Éù");
+subplot(122); imshow(BW_2); title("¼ÓÉÏ³¬Éù");
+imwrite(BW_1, 'Î´¼Ó³¬Éù±ßÔµ¼ì²â£¨LoG£©.png');
+imwrite(BW_2, '¼ÓÉÏ³¬Éù±ßÔµ¼ì²â£¨LoG£©.png');
 
 %canny±ßÔµ¼ì²âÆ÷
 BW3 = edge(Without_Ultrasound_1, 'canny', 0, 6.5);
 BW4 = edge(With_Ultrasound_1, 'canny', 0, 6.5);
-figure
-subplot(121); imshow(BW3); title("Î´¼Ó³¬Éù");
-subplot(122); imshow(BW4); title("¼ÓÉÏ³¬Éù");
 
+BWi_3 = imcomplement(BW3);
+BW_UINT8_3 = im2uint8(BWi_3)./4;
+BW_Last_3 = imadd(BW_UINT8_3, Without_Ultrasound_1);
+BW_3 = imadjust(BW_Last_3);
+
+BWi_4 = imcomplement(BW4);
+BW_UINT8_4 = im2uint8(BWi_4)./4;
+BW_Last_4 = imadd(BW_UINT8_4, With_Ultrasound_1);
+BW_4 = imadjust(BW_Last_4);
+
+figure
+subplot(121); imshow(BW_3); title("Î´¼Ó³¬Éù");
+subplot(122); imshow(BW_4); title("¼ÓÉÏ³¬Éù");
+imwrite(BW_3, 'Î´¼Ó³¬Éù±ßÔµ¼ì²â£¨LoG£©.png');
+imwrite(BW_4, '¼ÓÉÏ³¬Éù±ßÔµ¼ì²â£¨LoG£©.png');
 
