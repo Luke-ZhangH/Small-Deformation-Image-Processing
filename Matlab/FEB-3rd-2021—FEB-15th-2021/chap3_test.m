@@ -4,10 +4,10 @@ clear;
 crop_With_Ultrasound_0 = imread('./crop_With_Ultrasound.png');
 
 crop_Without_Ultrasound_0 = imread('crop_Without_Ultrasound.png');
-g_neg = intrans(crop_Without_Ultrasound_0, 'neg'); %负片
-g_log = intrans(crop_Without_Ultrasound_0, 'log'); %对数变换
-g_gamma = intrans(crop_Without_Ultrasound_0, 'gamma', 1); %gamma 变换
-g_stretch = intrans(crop_Without_Ultrasound_0, 'stretch', mean2(im2double(crop_Without_Ultrasound_0)), 0.8); %对比度变换
+g_neg = chap3_intrans(crop_Without_Ultrasound_0, 'neg'); %负片
+g_log = chap3_intrans(crop_Without_Ultrasound_0, 'log'); %对数变换
+g_gamma = chap3_intrans(crop_Without_Ultrasound_0, 'gamma', 1); %gamma 变换
+g_stretch = chap3_intrans(crop_Without_Ultrasound_0, 'stretch', mean2(im2double(crop_Without_Ultrasound_0)), 0.8); %对比度变换
 figure
 subplot(121); imshow(g_neg)
 subplot(122); imshow(g_log)

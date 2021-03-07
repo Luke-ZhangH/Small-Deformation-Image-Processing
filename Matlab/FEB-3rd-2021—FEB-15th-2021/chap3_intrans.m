@@ -1,5 +1,5 @@
 %% 对数变换函数：压缩图像的动态范围
-function g = intrans(f, varargin)
+function g = chap3_intrans(f, varargin)
 %provided 'neg', 'log', 'gamma', 'stretch' methods to process the input
 %pics.
     narginchk(2, 4)
